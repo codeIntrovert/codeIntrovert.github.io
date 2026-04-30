@@ -212,6 +212,12 @@ body::before {
     flex: 1;
 }
 
+.entry-title:hover {
+    color: var(--accent);
+    transition: color 0.5s;
+    cursor: pointer;
+}
+
 .entry-date {
     font-family: var(--font-mono);
     font-size: 10.5px;
@@ -413,6 +419,76 @@ a.ext:hover {
     box-shadow: var(--card-shad-hover);
 }
 
+/* ── TABLE OF CONTENTS ── */
+.toc {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    left: max(1.5rem, calc(50% - 410px - 130px));
+    width: 110px;
+    z-index: 100;
+}
+
+.toc-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 1px;
+    background: var(--rule);
+}
+
+.toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
+}
+
+.toc-link {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--ink3);
+    text-decoration: none;
+    padding: 10px 0 10px 16px;
+    position: relative;
+    transition: color var(--transition);
+}
+
+.toc-link::before {
+    content: '';
+    position: absolute;
+    left: -1px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 0;
+    background: var(--accent);
+    transition: height var(--transition);
+}
+
+.toc-link:hover {
+    color: var(--ink);
+}
+
+.toc-link.active {
+    color: var(--accent);
+    font-weight: 500;
+}
+
+.toc-link.active::before {
+    height: 100%;
+}
+
+@media (max-width: 1100px) {
+    .toc {
+        display: none;
+    }
+}
+
 /* ── SCROLL PROGRESS ── */
 .progress-bar {
     position: fixed;
@@ -445,7 +521,8 @@ a.ext:hover {
     }
 
     .print-btn,
-    .progress-bar {
+    .progress-bar,
+    .toc {
         display: none;
     }
 

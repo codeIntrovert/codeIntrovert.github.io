@@ -22,3 +22,22 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.08 });
 
 sections.forEach(s => observer.observe(s));
+
+// TOC Scroll Spy
+const tocLinks = document.querySelectorAll('.toc-link');
+const sectionsToSpy = document.querySelectorAll('section[id]');
+
+const spyObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + entry.target.id) {
+                    link.classList.add('active');
+                }
+            });
+        }
+    });
+}, { rootMargin: '-20% 0px -60% 0px' });
+
+sectionsToSpy.forEach(s => spyObserver.observe(s));
